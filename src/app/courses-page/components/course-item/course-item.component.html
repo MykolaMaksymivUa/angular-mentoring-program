@@ -1,0 +1,7 @@
+<hr />
+<h3>Course {{ title }}</h3>
+<span>#{{ id }}</span>
+<p>{{ description }}</p>
+<p>Duration {{ duration }} {{ duration <= 1 ? 'minute' : 'minutes' }}.</p>
+<p>Added at {{ creationDate | date: 'mediumTime' }}</p>
+<hr />
