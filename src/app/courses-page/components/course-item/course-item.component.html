@@ -1,7 +1,29 @@
-<hr />
-<h3>Course {{ title }}</h3>
-<span>#{{ id }}</span>
-<p>{{ description }}</p>
-<p>Duration {{ duration }} {{ duration <= 1 ? 'minute' : 'minutes' }}.</p>
-<p>Added at {{ creationDate | date: 'mediumTime' }}</p>
-<hr />
+<div class="wb-course-item">
+  <div class="wb-course-header-wrapper d-flex justify-content-between">
+    <h3 class="wb-course-item__title">Video Course {{ course.id }}. {{ course.title }}</h3>
+
+    <div class="wb-course-item__time d-flex">
+      <p class="pr-4">
+        <span class="fa fa-clock-o"></span>
+        {{ course.duration | timeConverter: 'minutes':'hours' }}
+      </p>
+      <p>
+        <span class="fa fa-calendar"></span>
+        {{ course.creationDate | date: 'mediumTime' }}
+      </p>
+    </div>
+  </div>
+  <div class="wb-course-item__content-wrapper d-flex">
+    <p class="wb-course-item__description w-75">{{ course.description }}</p>
+    <div class="wb-course-item__actions-wrapper w-25 d-flex align-items-start justify-content-end">
+      <button type="button" (click)="onCourseEdit()" class="btn btn-primary mr-3 wb-course-item__action-btn">
+        <span class="fa fa-edit mr-1"></span>
+        Edit
+      </button>
+      <button type="button" (click)="onCourseDelete()" class="btn btn-primary wb-course-item__action-btn">
+        <span class="fa fa-trash mr-1"></span>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

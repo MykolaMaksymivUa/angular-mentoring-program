@@ -1,1 +1,14 @@
-<p>courses-navigation works!</p>
+<div class="courses-navigation__wrapper d-flex justify-content-between p">
+  <div class="courses-navigation__search-bar d-flex align-items-center justify-content-between col-5 px-0">
+    <input type="text" #searchField class="form-control col-8" placeholder="Type to search" />
+
+    <button type="button" class="btn btn-success" (click)="onSearchClick(searchField.value)">
+      <span class="fa fa-search mr-1"></span>
+      Search
+    </button>
+  </div>
+  <button type="button" class="btn btn-primary align-self-end">
+    <span class="fa fa-plus-circle mr-1"></span>
+    Add course
+  </button>
+</div>

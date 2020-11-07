@@ -9,13 +9,11 @@ export interface Course {
 //for faster creation Course instance
 export class CourseModel {
   constructor(
-    id: string | number,
-    title: string,
-    creationDate: Date,
-    duration: number,
-    description: string = `Gxi liberulo sporto mi ke gxi tiu jam kaj tion. 
-      Sed direktis sendangxeran tie-cxi iros iu viro sxipo haltigis diveni..`,
-  ) {
-  }
-
+    public id: string | number,
+    public title: string,
+    public creationDate: Date = new Date(),
+    public duration: number = 0,
+    // eslint-disable-next-line max-len
+    public description: string = `Sadipscing eirmod voluptua no ea kasd ea lorem clita. Sanctus sit vero justo ut. Tempor dolor. Erat et sanctus labore et aliquyam dolore. Sanctus est accusam invidunt eirmod nonumy sit eos magna, est ipsum at dolore lorem, vero no dolor est et sit dolor erat. Erat consetetur amet et nonumy..`
+  ) { }
 }

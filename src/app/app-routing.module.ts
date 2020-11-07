@@ -7,23 +7,23 @@ import { PathNotFoundComponent } from './core/components';
 const routes: Routes = [
   {
     path: 'home',
-    component: CoursesPageComponent
+    component: CoursesPageComponent,
   },
 
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/home'
+    redirectTo: '/home',
   },
 
   {
     path: '**',
     component: PathNotFoundComponent,
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
