@@ -95,6 +95,11 @@
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.less"],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/less"
+              ]
+            },
             "scripts": []
           }
         },
