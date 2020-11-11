@@ -1,23 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+
 import { Course, CourseModel } from './../models';
+import { COURSES_LIST } from '../tokens';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-
-const mockCoursesList = [
-  new CourseModel(1, 'HTML & CSS', new Date(), 96),
-  new CourseModel(2, 'JavaScript', new Date(), 185),
-  new CourseModel(3, 'Angular Introduction', new Date(), 90),
-  new CourseModel(4, 'RxJS', new Date(), 20),
-];
 
 @Injectable({
   providedIn: 'any'
 })
 export class CoursesService {
-  private coursesListSubject: BehaviorSubject<Course[]> = new BehaviorSubject<CourseModel[]>(mockCoursesList);
-  private courseList$: Observable<Course[]> = this.coursesListSubject.asObservable();
+  private coursesListSubject: BehaviorSubject<Course[]>;
+  private courseList$: Observable<Course[]>;
 
-  constructor() {
+  constructor(@Inject(COURSES_LIST) private mockCoursesList: CourseModel[]) {
+    this.coursesListSubject = new BehaviorSubject<CourseModel[]>(mockCoursesList);
+    this.courseList$ = this.coursesListSubject.asObservable();
   }
 
   getCourses(): Observable<Course[]> {

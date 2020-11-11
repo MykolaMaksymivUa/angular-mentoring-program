@@ -10,6 +10,8 @@ export class TimeConverterPipe implements PipeTransform {
       const minutes = value % 60;
 
       return `${hours ? hours + 'h' : ''} ${minutes ? minutes + 'min' : ''}`;
+    } else if (from === to && to === 'minutes') {
+      return `${value}min`;
     }
   }
 

@@ -10,7 +10,11 @@ export class CoursesNavigationComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onSearchClick(term: string) {
-    term.length && console.log(`Search by ${term}`);
+  onSearchClick(term: string): boolean | void {
+    if (!term.trim()) {
+      return false;
+    }
+
+    console.log(`Search by ${term}`);
   }
 }
