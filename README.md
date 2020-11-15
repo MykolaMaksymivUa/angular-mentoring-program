@@ -20,3 +20,11 @@
 ##### Added course list as injection token
 ##### Implemented all points from Task 3.Unit tests
 -----------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------
+#### branch: task-4_directives-pipes
+##### Added built-in pipes to templates
+##### Implemented filter and orderBy pipes, fixed timeConverter pipe
+##### Implemented all points from Task 4.Directives and pipes
+##### Added all unit tests for new component, fixed failed tests.
+-----------------------------------------------------------------------------------------------------------------------------------

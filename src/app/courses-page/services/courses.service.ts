@@ -32,4 +32,8 @@ export class CoursesService {
 
     this.coursesListSubject.next(currentList);
   }
+
+  isEmptyCourseList(): boolean {
+    return !this.coursesListSubject.getValue().length;
+  }
 }

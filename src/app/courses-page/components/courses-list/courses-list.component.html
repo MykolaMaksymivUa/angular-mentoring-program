@@ -1,10 +1,18 @@
-<wb-course-item
-  *ngFor="let courseEntry of coursesService.getCourses() | async"
-  [course]="courseEntry"
-  (courseDelete)="onCourseDelete($event)"
-  (courseEdit)="onCourseEdit($event)"
-></wb-course-item>
+<wb-courses-navigation (searchClick)="searchTerm = $event"></wb-courses-navigation>
 
-<div class="load-more">
-  <a href="#" target="" rel="noopener noreferrer" class="js-load-more p-4" (click)="onLoadMore($event)">Load More</a>
-</div>
+<ng-container *ngIf="!coursesService.isEmptyCourseList(); else emptyList">
+  <wb-course-item
+    *ngFor="
+      let courseEntry of coursesService.getCourses() | async | filter: 'title':searchTerm | orderBy: 'creationDate'
+    "
+    [course]="courseEntry"
+    (courseDelete)="onCourseDelete($event)"
+    (courseEdit)="onCourseEdit($event)"
+  ></wb-course-item>
+
+  <div class="load-more">
+    <a href="#" target="" rel="noopener noreferrer" class="js-load-more p-4" (click)="onLoadMore($event)">Load More</a>
+  </div>
+</ng-container>
+
+<ng-template #emptyList><h3 class="text-center font-weight-bold">No Data. Feel free to add new course</h3></ng-template>

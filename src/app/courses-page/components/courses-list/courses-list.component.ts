@@ -1,4 +1,5 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Course } from '../../models';
 
 import { CoursesService } from './../../services';
 
@@ -8,6 +9,8 @@ import { CoursesService } from './../../services';
   styleUrls: ['./courses-list.component.less'],
 })
 export class CoursesListComponent implements OnInit, OnChanges {
+  searchTerm = '';
+
   constructor(public coursesService: CoursesService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
