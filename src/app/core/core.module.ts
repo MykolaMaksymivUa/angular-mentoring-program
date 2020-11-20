@@ -5,18 +5,11 @@ import { HeaderComponent, FooterComponent, BreadcrumbsComponent } from './compon
 import { HeaderModule } from './components/header/header.module';
 
 @NgModule({
-  declarations: [
-    BreadcrumbsComponent,
-    FooterComponent
-  ],
+  declarations: [BreadcrumbsComponent, FooterComponent],
   imports: [
     CommonModule,
-    HeaderModule
+    HeaderModule,
   ],
-  exports: [
-    HeaderComponent,
-    BreadcrumbsComponent,
-    FooterComponent
-  ]
+  exports: [HeaderComponent, BreadcrumbsComponent, FooterComponent],
 })
 export class CoreModule { }

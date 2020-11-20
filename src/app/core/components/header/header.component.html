@@ -1,5 +1,23 @@
-<div class="wb-header">
-  Header
-  <wb-logo></wb-logo>
-  <wb-account></wb-account>
-</div>
+<header class="wb-header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg">
+      <wb-logo></wb-logo>
+      <!-- <a class="navbar-brand" [routerLink]="['home']">ICON</a> -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse wb-header__menu" id="navbarSupportedContent">
+        <wb-account class="my-2 my-lg-2"></wb-account>
+      </div>
+    </nav>
+  </div>
+</header>

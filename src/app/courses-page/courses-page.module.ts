@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { SharedModule } from './../shared/shared.module';
 import { CoursesPageRoutingModule } from './courses-page-routing.module';
 import { CoursesListComponent, CourseItemComponent, CoursesNavigationComponent } from './components';
 import { CoursesPageComponent } from './courses-page.component';
-
 
 @NgModule({
   declarations: [
@@ -14,10 +13,9 @@ import { CoursesPageComponent } from './courses-page.component';
     CoursesPageComponent
   ],
   imports: [
-    CommonModule,
-    CoursesPageRoutingModule
+    SharedModule,
+    CoursesPageRoutingModule,
   ],
-  exports: [
-  ]
+  exports: [],
 })
 export class CoursesPageModule { }

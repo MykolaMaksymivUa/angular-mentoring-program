@@ -1,2 +1,10 @@
-<p>courses-list works!</p>
-<wb-course-item></wb-course-item>
+<wb-course-item
+  *ngFor="let courseEntry of coursesService.getCourses() | async"
+  [course]="courseEntry"
+  (courseDelete)="onCourseDelete($event)"
+  (courseEdit)="onCourseEdit($event)"
+></wb-course-item>
+
+<div class="load-more">
+  <a href="#" target="" rel="noopener noreferrer" class="p-4" (click)="onLoadMore($event)">Load More</a>
+</div>

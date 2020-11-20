@@ -14,7 +14,7 @@ import { CoursesPageModule } from './courses-page/courses-page.module';
     CoreModule,
     CoursesPageModule,
     //must be last
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
