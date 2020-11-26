@@ -1,9 +1,14 @@
-<a href="#" class="wb-account__button">
-  <span class="fa fa-user pr-2"></span>
-  User Login
-</a>
+<div class="wb-account wb-account--loggedIn" *ngIf="authService.isAuthenticated; else unauthorizedMenu">
+  <a href="#" class="wb-account__button">
+    <span class="fa fa-user pr-2"></span>
+    Hello, {{ authService.getUserInfo() }}
+  </a>
 
-<a href="#" class="wb-account__button">
-  <span class="fa fa-sign-out pr-2"></span>
-  Log off
-</a>
+  <a class="wb-account__button" (click)="authService.logout()">
+    <span class="fa fa-sign-out pr-2"></span>
+    Log off
+  </a>
+</div>
+<ng-template #unauthorizedMenu>
+  <a href="#" class="wb-account__button" routerLink="login"><span class="fa fa-user pr-2"></span>Sign in </a>
+</ng-template>
