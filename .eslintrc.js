@@ -23,17 +23,17 @@ module.exports = {
     },
 
     //@TODO check after implementing unit tests.
-    // {
-    //   files: ['src/**/*.spec.ts', 'src/**/*.d.ts'],
-    //   parserOptions: {
-    //     project: './src/tsconfig.spec.json',
-    //   },
-    //   extends: ['plugin:jasmine/recommended'],
-    //   plugins: ['jasmine'],
-    //   env: { jasmine: true },
-    //   rules: {
-    //     '@typescript-eslint/no-unused-vars': 'off',
-    //   },
-    // },
+    {
+      files: ['src/**/*.spec.ts', 'src/**/*.d.ts'],
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+      extends: ['plugin:jasmine/recommended'],
+      plugins: ['jasmine'],
+      env: { jasmine: true },
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
   ],
 };
