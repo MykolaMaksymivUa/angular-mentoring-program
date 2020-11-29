@@ -46,7 +46,7 @@ describe('CoursesService', () => {
   });
 
   it('addCourse should add course to the existing list', (done: DoneFn) => {
-    const newCourse = new CourseModel(77, 'Test', new Date());
+    const newCourse = new CourseModel(5, 'Test', new Date());
     service.addCourse(newCourse);
     mockServiceItems.push(newCourse);
 
@@ -54,6 +54,14 @@ describe('CoursesService', () => {
 
       expect(list).toEqual(mockServiceItems)
       done();
+    })
+  });
+
+  it('getCourse with id \'1\' should return course with title \'1\'', () => {
+    const searchedCourse = mockServiceItems[0];
+
+    service.getCourse(searchedCourse.id).subscribe((course: CourseModel) => {
+      expect(course).toEqual(searchedCourse);
     })
   });
 

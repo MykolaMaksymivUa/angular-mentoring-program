@@ -4,6 +4,7 @@ import { CoursesService } from './../../services';
 import { DialogService } from './../../../core/services';
 
 import { takeWhile } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'wb-courses-list',
@@ -16,6 +17,8 @@ export class CoursesListComponent implements OnInit, OnChanges {
   constructor(
     public coursesService: CoursesService,
     private dialog: DialogService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -27,8 +30,7 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
 
   onCourseEdit(id: string | number) {
-    // this.router.navigate([`course/${id}`]);
-    console.log(`Course with id: ${id} was edited`);
+    this.router.navigate([`edit/${id}`], { relativeTo: this.route });
   }
 
   onCourseDelete(id: string | number) {

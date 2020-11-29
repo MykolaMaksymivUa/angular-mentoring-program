@@ -1,0 +1,20 @@
+<div class="row align-items-center">
+  <div class="form-group col-3">
+    <label for="time-input">Duration:</label>
+    <input
+      type="number"
+      class="form-control"
+      id="time-input"
+      name="duration"
+      placeholder="Add duration"
+      [(ngModel)]="timeDuration"
+      required
+    />
+  </div>
+
+  <div class="col-3 mt-2">
+    <span class="font-italic">
+      {{ timeDuration | timeConverter: 'minutes':'hours' }}
+    </span>
+  </div>
+</div>
