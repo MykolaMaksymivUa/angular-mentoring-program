@@ -11,6 +11,7 @@ export class AuthenticationService {
   private readonly storageKey: string = 'userData';
   private userData: UserEntity;
   isAuthenticated = false;
+  redirectUrl: string;
 
   constructor(
     private ls: LocalStorageService

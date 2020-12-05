@@ -1,5 +1,10 @@
 <div class="wb-breadcrumbs">
   <div class="container">
-    <p class="wb-breadcrumbs__path-element font-weight-bold">Courses</p>
+    <p class="wb-breadcrumbs__path-element font-weight-bold">
+      <ng-container *ngFor="let item of breadcrumbItems; last as isLast; first as isFirst">
+        <a [routerLink]="[item.url]">{{ item.label }}</a>
+        <span class="px-2" *ngIf="isFirst || !isLast">/</span>
+      </ng-container>
+    </p>
   </div>
 </div>

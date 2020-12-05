@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { HeaderComponent, FooterComponent, BreadcrumbsComponent, LoginPageComponent } from './components';
@@ -8,6 +9,7 @@ import { SharedModule } from './../shared/shared.module';
   declarations: [BreadcrumbsComponent, FooterComponent, LoginPageComponent],
   imports: [
     SharedModule,
+    RouterModule,
     HeaderModule,
   ],
   exports: [HeaderComponent, BreadcrumbsComponent, FooterComponent],

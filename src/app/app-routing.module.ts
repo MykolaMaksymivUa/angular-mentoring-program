@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { LoginPageComponent, PathNotFoundComponent } from './core/components';
+import { AuthGuard } from './core/guards';
 
 const routes: Routes = [
   {
     path: 'courses',
-    component: CoursesPageComponent,
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./courses-page/courses-page.module').then(m => m.CoursesPageModule),
   },
   {
     path: 'login',
     component: LoginPageComponent,
+    data: {
+      breadcrumb: 'Login',
+    },
   },
 
   {
@@ -23,6 +27,9 @@ const routes: Routes = [
   {
     path: '**',
     component: PathNotFoundComponent,
+    data: {
+      breadcrumb: null,
+    },
   },
 ];
 
