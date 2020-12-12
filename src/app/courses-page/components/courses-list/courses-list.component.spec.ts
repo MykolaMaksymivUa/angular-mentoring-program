@@ -44,8 +44,9 @@ describe('CoursesListComponent', () => {
     expect(component.onLoadMore).toHaveBeenCalledTimes(1);
   }));
 
-  it('on course delete list with courses should be updated', (done: DoneFn) => {
+  it('on course delete click and clicking OK at confirm dialog course list should updated', (done: DoneFn) => {
     fixture.detectChanges();
+    spyOn(window, 'confirm').and.returnValue(true);
     const originalList = [...mockCoursesList];
     const deletedCourse = mockServiceItems[0];
     component.onCourseDelete(deletedCourse.id);
@@ -55,6 +56,19 @@ describe('CoursesListComponent', () => {
       expect(list).not.toContain(deletedCourse);
 
       done();
-    })
-  })
-});
+    });
+  });
+
+  it('on course delete click and clicking cancel at confirm dialog course list should be the same', (done: DoneFn) => {
+    fixture.detectChanges();
+    spyOn(window, 'confirm').and.returnValue(false);
+    const deletedCourse = mockServiceItems[0];
+    component.onCourseDelete(deletedCourse.id);
+
+    component.coursesService.getCourses().subscribe((list: CourseModel[]) => {
+      expect(list).toContain(deletedCourse);
+
+      done();
+    });
+  });
+})

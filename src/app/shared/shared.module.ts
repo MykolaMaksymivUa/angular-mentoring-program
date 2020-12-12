@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { TimeConverterPipe, OrderByPipe, FilterPipe } from './pipes';
 import { CourseHighlightDirective } from './directives';
@@ -12,10 +13,12 @@ const exportedPipes = [TimeConverterPipe, OrderByPipe, FilterPipe];
     CourseHighlightDirective,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
   ],
   exports: [
     CommonModule,
+    FormsModule,
     CourseHighlightDirective,
     ...exportedPipes,
   ]

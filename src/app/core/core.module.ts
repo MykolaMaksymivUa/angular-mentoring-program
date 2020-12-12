@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { HeaderComponent, FooterComponent, BreadcrumbsComponent } from './components';
+import { HeaderComponent, FooterComponent, BreadcrumbsComponent, LoginPageComponent } from './components';
 import { HeaderModule } from './components/header/header.module';
+import { SharedModule } from './../shared/shared.module';
 
 @NgModule({
-  declarations: [BreadcrumbsComponent, FooterComponent],
+  declarations: [BreadcrumbsComponent, FooterComponent, LoginPageComponent],
   imports: [
-    CommonModule,
+    SharedModule,
     HeaderModule,
   ],
   exports: [HeaderComponent, BreadcrumbsComponent, FooterComponent],

@@ -25,6 +25,13 @@ export class CoursesService {
     this.coursesListSubject.next([...this.coursesListSubject.value, course]);
   }
 
+  updateCourse(course: Course) {
+    const currentList = this.coursesListSubject.value;
+    currentList[currentList.findIndex(c => c.id === course.id)] = course;
+
+    this.coursesListSubject.next(currentList);
+  }
+
   deleteCourse(id: number | string) {
     const currentList = this.coursesListSubject.value;
     const index = currentList.findIndex(c => c.id === id);

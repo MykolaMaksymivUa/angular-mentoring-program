@@ -1,21 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { UserEntity } from 'src/app/core/models';
 
+import { AuthenticationService } from 'src/app/core/services';
 @Component({
   selector: 'wb-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.less'],
 })
-export class AccountComponent implements OnInit, UserEntity {
-  id: string | number;
-  firstName: string;
-  lastName: string;
-
-  constructor() {}
+export class AccountComponent implements OnInit {
+  constructor(
+    public authService: AuthenticationService,
+  ) { }
 
   ngOnInit(): void {
-    this.id = '007';
-    this.firstName = 'Mykola';
-    this.lastName = 'Maksymiv';
   }
 }
