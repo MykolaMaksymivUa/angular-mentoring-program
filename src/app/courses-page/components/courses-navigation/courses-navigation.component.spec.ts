@@ -1,5 +1,4 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { CoursesNavigationComponent } from './courses-navigation.component';
 
@@ -23,15 +22,13 @@ describe('CoursesNavigationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('on empty or with space character input search click should return function preventing', fakeAsync(() => {
-    const searchClickSpy = spyOn(component, 'onSearchClick').and.returnValue(false)
-    let searchBtn = fixture.debugElement.query(By.css('.js-search-btn'));
+  it('onSearchClick should raises and only once', (done: DoneFn) => {
+    component.searchClick.subscribe((term: string) => {
+      expect(term).toBe(' ');
+      done();
+    })
 
-    searchBtn.triggerEventHandler('click', '');
-    tick();
-    fixture.detectChanges();
+    component.onSearchClick(' ');
+  });
 
-    expect(component.onSearchClick).toHaveBeenCalledTimes(1);
-    expect(searchClickSpy.calls.mostRecent().returnValue).toBe(false);
-  }));
 });

@@ -22,4 +22,15 @@
     letter-spacing: -0.1;
     font-weight: @semiBold;
   }
+
+  &--topRated {
+    border: 2px solid rgb(235, 235, 91);
+
+    .wb-course-item {
+      &__title::after {
+        content: "\2605";
+        color: rgb(235, 235, 91);
+      }
+    }
+  }
 }

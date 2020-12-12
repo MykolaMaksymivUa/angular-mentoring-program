@@ -1,5 +1,6 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { OrderByPipe, FilterPipe } from '../../../shared/pipes';
 
 import { CourseModel } from '../../models';
 import { COURSES_LIST, mockCoursesList } from '../../tokens';
@@ -17,7 +18,7 @@ describe('CoursesListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CoursesListComponent],
+      declarations: [CoursesListComponent, OrderByPipe, FilterPipe],
       providers: [{ provide: COURSES_LIST, useValue: mockServiceItems }]
     }).compileComponents();
   });

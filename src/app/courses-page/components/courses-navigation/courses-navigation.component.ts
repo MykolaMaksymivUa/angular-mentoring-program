@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'wb-courses-navigation',
@@ -6,15 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses-navigation.component.less'],
 })
 export class CoursesNavigationComponent implements OnInit {
+  @Output() searchClick = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void { }
 
-  onSearchClick(term: string): boolean | void {
-    if (!term.trim()) {
-      return false;
-    }
-
+  onSearchClick(term: string): void {
     console.log(`Search by ${term}`);
+    this.searchClick.emit(term);
   }
 }

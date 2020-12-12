@@ -4,6 +4,7 @@ export interface Course {
   creationDate: Date;
   duration: number;
   description?: string;
+  topRatedCourse?: boolean;
 }
 
 //for faster creation Course instance
@@ -13,7 +14,8 @@ export class CourseModel {
     public title: string,
     public creationDate: Date = new Date(),
     public duration: number = 0,
+    public topRatedCourse: boolean = false,
     // eslint-disable-next-line max-len
-    public description: string = `Sadipscing eirmod voluptua no ea kasd ea lorem clita. Sanctus sit vero justo ut. Tempor dolor. Erat et sanctus labore et aliquyam dolore. Sanctus est accusam invidunt eirmod nonumy sit eos magna, est ipsum at dolore lorem, vero no dolor est et sit dolor erat. Erat consetetur amet et nonumy..`
+    public description: string = `Sadipscing eirmod voluptua no ea kasd ea lorem clita. Sanctus sit vero justo ut. Tempor dolor. Erat et sanctus labore et aliquyam dolore. Sanctus est accusam invidunt eirmod nonumy sit eos magna, est ipsum at dolore lorem, vero no dolor est et sit dolor erat. Erat consetetur amet et nonumy..`,
   ) { }
 }

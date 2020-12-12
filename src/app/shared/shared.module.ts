@@ -1,19 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TimeConverterPipe } from './pipes';
+import { TimeConverterPipe, OrderByPipe, FilterPipe } from './pipes';
+import { CourseHighlightDirective } from './directives';
 
+const exportedPipes = [TimeConverterPipe, OrderByPipe, FilterPipe];
 
 @NgModule({
   declarations: [
-    TimeConverterPipe,
+    ...exportedPipes,
+    CourseHighlightDirective,
   ],
   imports: [
     CommonModule
   ],
   exports: [
     CommonModule,
-    TimeConverterPipe,
+    CourseHighlightDirective,
+    ...exportedPipes,
   ]
 })
 export class SharedModule { }
