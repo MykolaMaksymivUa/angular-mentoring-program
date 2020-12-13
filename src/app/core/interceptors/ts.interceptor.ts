@@ -2,16 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, delay, finalize } from 'rxjs/operators';
 
+import { SpinnerService } from './../widgets';
 import { AuthenticationService } from '../services';
 
 @Injectable()
 export class TsInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthenticationService) { }
+  constructor(
+    private authService: AuthenticationService,
+    private spinner: SpinnerService
+  ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.userToken?.token;
+    this.spinner.show();
 
     let clonedRequest;
     if (!req.url.includes('login') && token) {
@@ -26,6 +31,8 @@ export class TsInterceptor implements HttpInterceptor {
 
     return next.handle(clonedRequest)
       .pipe(
+        // to show spinner
+        // delay(1000),
         catchError((err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
             console.error('An error occurred:', err.error.message);
@@ -34,7 +41,8 @@ export class TsInterceptor implements HttpInterceptor {
           }
 
           return throwError('Something bad happened; please try again later.');
-        })
+        }),
+        finalize(() => this.spinner.hide()),
       );
   }
 }

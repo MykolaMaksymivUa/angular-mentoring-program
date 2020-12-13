@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SpinnerService } from './core/widgets';
 
 @Component({
   selector: 'wb-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Web-School';
+  constructor(
+    public spinner: SpinnerService,
+  ) { }
 }

@@ -12,8 +12,8 @@ import { httpInterceptorProviders } from './core/interceptors';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    CoreModule,
     HttpClientModule,
+    CoreModule,
     //must be last
     AppRoutingModule,
   ],
