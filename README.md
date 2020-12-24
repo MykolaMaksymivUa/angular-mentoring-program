@@ -2,17 +2,25 @@
 
 ===================================================================================================================================
 ### Current test summary
-TOTAL: 50 SUCCESS
-TOTAL: 50 SUCCESS
-TOTAL: 50 SUCCESS
+TOTAL: 54 SUCCESS
+TOTAL: 54 SUCCESS
+TOTAL: 54 SUCCESS
 
 Coverage summary
-Statements   : 88.76% ( 150/169 )
-Branches     : 79.07% ( 34/43 )
-Functions    : 88% ( 66/75 )
-Lines        : 87.14% ( 122/140 )
+Statements   : 81.86% ( 167/204 )
+Branches     : 67.92% ( 36/53 )
+Functions    : 82.35% ( 70/85 )
+Lines        : 79.77% ( 138/173 )
 ===================================================================================================================================
 
+-----------------------------------------------------------------------------------------------------------------------------------
+#### branch: task-7_routing
+
+##### Added auth guard with canActivate, canActivateChild and canLoad methods
+##### Added all unit tests for new modules, fixed failed tests.
+##### Implemented breadcrumbs component
+##### Implemented all points from Task 7.Routing
+-----------------------------------------------------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------------------------------------------------
 #### branch: task-6_change-detection
