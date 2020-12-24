@@ -27,9 +27,11 @@ describe('AuthenticationService', () => {
   });
 
   it('getUserInfo of user \'Test123\' should return \'Test123\'', () => {
+    service.logout();
     const userLogin = 'Test123';
     service.login(userLogin, '123456');
 
     expect(service.getUserInfo()).toBe(userLogin);
+    service.logout();
   });
 });

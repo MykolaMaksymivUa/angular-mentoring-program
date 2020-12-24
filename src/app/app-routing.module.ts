@@ -6,7 +6,7 @@ import { LoginPageComponent, PathNotFoundComponent } from './core/components';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'courses',
     component: CoursesPageComponent,
   },
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/home',
+    redirectTo: '/courses',
   },
 
   {
