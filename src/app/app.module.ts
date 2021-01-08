@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 import { CoreModule } from './core/core.module';
 import { httpInterceptorProviders } from './core/interceptors';
+import { RootStoreModule } from './core/@ngrx/root-store.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import { httpInterceptorProviders } from './core/interceptors';
     BrowserModule,
     HttpClientModule,
     CoreModule,
+    RootStoreModule,
     //must be last
     AppRoutingModule,
   ],
