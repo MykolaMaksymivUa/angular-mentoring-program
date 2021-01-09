@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { CoursesService } from '../../services';
 import { CourseModel } from './../../models';
+import { CoursesFacade } from 'src/app/core/@ngrx/courses/courses.facade';
 
 @Component({
   selector: 'wb-course-form',
@@ -14,35 +13,47 @@ import { CourseModel } from './../../models';
   styleUrls: ['./course-form.component.less']
 })
 export class CourseFormComponent implements OnInit, OnDestroy {
-  course: CourseModel;
   private courseSub: Subscription;
+  private componentDestroyed$: Subject<void> = new Subject<void>();
+  course: CourseModel;
 
   constructor(
-    private router: Router,
-    private activeRoute: ActivatedRoute,
-    private courseService: CoursesService
+    private courseFacade: CoursesFacade
   ) { }
 
   ngOnInit(): void {
-    this.courseSub = this.activeRoute.data
-      .pipe(pluck('course'))
-      .subscribe((course: CourseModel) => this.course = course);
+    this.courseFacade.selectedCourse$
+      .pipe(takeUntil(this.componentDestroyed$))
+      .subscribe((course: CourseModel) => {
+        this.course = course;
+      });
   }
 
   ngOnDestroy(): void {
-    this.courseSub.unsubscribe();
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.complete();
   }
 
   onSaveCourse(form: NgForm) {
-    const method = this.course.id ? 'updateCourse' : 'addCourse';
-    this.course.creationDate = new Date(form.value.creationDate);
-    this.course.duration = form.value.duration;
+    const method = this.course.id ? 'updateCourse' : 'createCourse';
+    const course = {
+      ...this.course,
+      ...form.value,
+      creationDate: new Date(form.value.creationDate),
+      authors: [
+        ...this.course.authors,
+        {
+          id: 7777,
+          name: 'Mykola',
+          lastName: 'Maksymiv'
+        }]
+    }
 
-    this.courseService[method](this.course).subscribe(() => this.router.navigate(['/courses']));
+    this.courseFacade[method]({ course });
   }
 
   onCancel() {
     // deactivate guard ???
-    this.router.navigate(['/courses']);
+    this.courseFacade.goTo({ path: ['/courses'] });
   }
 }

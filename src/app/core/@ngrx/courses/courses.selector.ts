@@ -29,11 +29,10 @@ export const selectCourseByUrl = createSelector(
   selectCoursesEntities,
   selectRouterState,
   (courses, router): Course => {
-
-    const courseID = router.state.params.taskID;
+    const courseID = router.state.params.courseID;
     if (courseID && Array.isArray(courses)) {
-      return courseID.find(course => course.id === +courseID);
+      return courses.find(course => course.id === +courseID);
     } else {
-      return new CourseModel(1, '', new Date(), 0, { id: null, name: '' }, false, '');
+      return new CourseModel(0, '', new Date(), 0, [], false, '');
     }
   });

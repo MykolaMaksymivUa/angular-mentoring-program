@@ -1,5 +1,7 @@
 import { CoursesState } from './courses';
+import { UserState } from './user';
 
 export interface AppState {
-  courses: CoursesState
+  courses: CoursesState,
+  user: UserState
 }

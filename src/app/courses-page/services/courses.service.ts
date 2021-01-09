@@ -30,14 +30,9 @@ export class CoursesService {
   }
 
   addCourse(course: Course): Observable<Course> {
-    course.id = this.generateNewCourseID();
-    course.authors = {
-      id: 7777,
-      name: 'Mykola',
-      lastName: 'Maksymiv'
-    }
+    const newCourse = { ...course, id: this.generateNewCourseID() }
 
-    return this.http.post<Course>(this.constants.coursesEndpoint, course);
+    return this.http.post<Course>(this.constants.coursesEndpoint, newCourse);
   }
 
   getCourse(id: string | number): Observable<Course> {
@@ -45,11 +40,6 @@ export class CoursesService {
   }
 
   updateCourse(course: Course): Observable<Course> {
-    course.authors = {
-      id: 7777,
-      name: 'Mykola',
-      lastName: 'Maksymiv'
-    }
 
     return this.http.patch<Course>(`${this.constants.coursesEndpoint}/${course.id}`, course);
   }

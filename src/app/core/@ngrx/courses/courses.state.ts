@@ -5,7 +5,6 @@ export interface CoursesState {
   readonly loading: boolean;
   readonly loaded: boolean;
   readonly error: Error | string;
-  // readonly 
 }
 
 export const initialCoursesState: CoursesState = {

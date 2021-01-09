@@ -8,6 +8,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { RouterEffects, routerReducers, CustomSerializer } from './router';
 import { environment } from 'src/environments/environment';
 import { CoursesStoreModule } from './courses/courses-store.module';
+import { UserStoreModule } from './user/user-store.module';
 
 
 
@@ -32,6 +33,7 @@ import { CoursesStoreModule } from './courses/courses-store.module';
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     CoursesStoreModule,
+    UserStoreModule,
   ]
 })
 export class RootStoreModule { }

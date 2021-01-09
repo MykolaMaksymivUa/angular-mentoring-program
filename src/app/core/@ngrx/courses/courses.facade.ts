@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { map, } from 'rxjs/operators';
 
-import { Course, GetCoursesParams } from 'src/app/courses-page/models';
-import { AppState, selectCourses, selectCoursesError } from '..';
+import { Course } from 'src/app/courses-page/models';
+import { AppState } from '..';
+import { selectCourseByUrl, selectCourses, selectCoursesError } from './courses.selector'
 import * as CoursesActions from './courses.actions';
 import * as RouterActions from '../router/router.actions';
 
@@ -19,6 +20,7 @@ export class CoursesFacade {
 
   courses$: Observable<Course[]>;
   coursesError$: Observable<Error | string>;
+  selectedCourse$: Observable<Course>;
 
   constructor(
     private store: Store<AppState>,
@@ -27,6 +29,7 @@ export class CoursesFacade {
       map((courses: Course[]) => courses.slice(0, this.countOfElements))
     )
     this.coursesError$ = this.store.select(selectCoursesError);
+    this.selectedCourse$ = this.store.select(selectCourseByUrl);
   }
 
   searchCoursesByTerm(term: string): Observable<Course[]> {
@@ -51,6 +54,10 @@ export class CoursesFacade {
 
   updateCourse(props: { course: Course }) {
     this.store.dispatch(CoursesActions.updateCourse(props));
+  }
+
+  deleteCourse(props: { id: number }) {
+    this.store.dispatch(CoursesActions.deleteCourse(props));
   }
 
   goTo(props: {

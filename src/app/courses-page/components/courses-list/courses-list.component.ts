@@ -1,16 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { CoursesService } from './../../services';
 import { DialogService } from './../../../core/services';
+import { Course } from '../../models';
 
 import { takeWhile } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Course } from '../../models';
 
-
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/core/@ngrx/app.state';
-import * as CoursesActions from '../../../core/@ngrx/courses/courses.actions';
 import { CoursesFacade } from 'src/app/core/@ngrx/courses/courses.facade';
 
 @Component({
@@ -23,18 +18,12 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   coursesError$: Observable<Error | string>;
 
   constructor(
-    public coursesService: CoursesService,
     private dialog: DialogService,
-
-    private store: Store<AppState>,
     private coursesFacade: CoursesFacade
   ) {
   }
 
   ngOnInit(): void {
-    // move to strategy
-    this.store.dispatch(CoursesActions.loadCourses({ params: {} }));
-
     this.courses$ = this.coursesFacade.courses$;
     this.coursesError$ = this.coursesFacade.coursesError$;
   }
@@ -51,15 +40,12 @@ export class CoursesListComponent implements OnInit, OnDestroy {
       .pipe(
         takeWhile(val => !!val)
       )
-      .subscribe(() => this.coursesService.deleteCourse(id).subscribe(() => {
-        // const index = this.courses.findIndex(el => el.id === id);
-        // on success response - delete from UI store element
-        // this.courses.splice(index, 1);
-      }));
+      .subscribe(() => this.coursesFacade.deleteCourse({ id }));
   }
 
   onLoadMore(e) {
     e.preventDefault();
+
     this.courses$ = this.coursesFacade.loadMoreProducts();
   }
 

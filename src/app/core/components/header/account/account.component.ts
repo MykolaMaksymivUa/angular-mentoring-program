@@ -1,32 +1,32 @@
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService } from 'src/app/core/services';
+import { Store } from '@ngrx/store';
+import * as UserActions from '../../../@ngrx/user/user.actions';
+import { selectUsername, selectUserIsAuthenticated } from 'src/app/core/@ngrx/user';
 @Component({
   selector: 'wb-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.less'],
 })
 export class AccountComponent implements OnInit {
-  username = '';
+  isAuthenticated$: Observable<boolean>;
+  username$: Observable<string>;
+
   constructor(
     public authService: AuthenticationService,
-    private router: Router,
-  ) { }
+    private store: Store,
+  ) {
+    this.isAuthenticated$ = this.store.select(selectUserIsAuthenticated);
+    this.username$ = this.store.select(selectUsername);
+    this.store.dispatch(UserActions.getUserInfo());
+  }
 
   ngOnInit(): void {
-    this.getUserInfo();
   }
 
   onLogout() {
-    this.authService.logout();
-
-    this.router.navigate(['login']);
-  }
-
-  getUserInfo() {
-    if (this.authService.isAuthenticated) {
-      this.authService.getUserInfo().subscribe((name: string) => this.username = name);
-    }
+    this.store.dispatch(UserActions.userLogout());
   }
 }
