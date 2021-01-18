@@ -27,7 +27,7 @@ export class CourseResolveGuard implements Resolve<CourseModel> {
   ): CourseModel | Observable<CourseModel> | Promise<CourseModel> {
 
     if (!route.paramMap.has('courseID')) {
-      return of(new CourseModel('', '', new Date(), 0, false, ''));
+      return of(new CourseModel(1, '', new Date(), 0, { id: null, name: '' }, false, ''));
     }
 
     const id = +route.paramMap.get('courseID');

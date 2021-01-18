@@ -1,8 +1,22 @@
 <div class="courses-navigation__wrapper d-flex justify-content-between p">
-  <div class="courses-navigation__search-bar d-flex align-items-center justify-content-between col-5 px-0">
-    <input type="text" #searchField class="form-control col-8" placeholder="Type to search" />
+  <div class="courses-navigation__search-bar d-flex align-items-center justify-content-between col-6 px-0">
+    <input
+      type="text"
+      #searchField
+      class="form-control col-8"
+      placeholder="Type to search"
+      (keyup)="searchField.value.length >= 3 && keyUp$.next(searchField.value)"
+    />
 
-    <button type="button" class="btn btn-success js-search-btn" (click)="onSearchClick(searchField.value)">
+    <a
+      href="javascript:void(0);"
+      *ngIf="searchField.value.length"
+      (click)="keyUp$.next('') || (searchField.value = '')"
+      class="bnt btn-link mr-4"
+      >Clear</a
+    >
+
+    <button type="button" class="btn btn-success js-search-btn">
       <span class="fa fa-search mr-1"></span>
       Search
     </button>

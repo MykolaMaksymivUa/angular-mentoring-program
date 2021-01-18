@@ -1,5 +1,5 @@
 <div
-  [class]="course.topRatedCourse ? 'wb-course-item wb-course-item--topRated' : 'wb-course-item'"
+  [class]="course.isTopRated ? 'wb-course-item wb-course-item--topRated' : 'wb-course-item'"
   [wbCourseHighlight]="course.creationDate"
 >
   <div class="wb-course-header-wrapper d-flex justify-content-between">

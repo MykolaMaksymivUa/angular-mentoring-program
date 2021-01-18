@@ -38,8 +38,7 @@ export class CourseFormComponent implements OnInit, OnDestroy {
     this.course.creationDate = new Date(form.value.creationDate);
     this.course.duration = form.value.duration;
 
-    this.courseService[method](this.course);
-    this.router.navigate(['/courses']);
+    this.courseService[method](this.course).subscribe(() => this.router.navigate(['/courses']));
   }
 
   onCancel() {

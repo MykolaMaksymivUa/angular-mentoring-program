@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../services';
 
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'wb-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.less']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
+  private sub: Subscription;
 
   constructor(
     public authService: AuthenticationService,
@@ -19,9 +21,13 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
   onLogin(form: NgForm) {
-    this.authService.login(form.value.login, form.value.password);
-    this.router.navigate(['']);
+    this.sub = this.authService.login(form.value.login, form.value.password)
+      .subscribe(() => this.router.navigate(['']));
   }
 
 }

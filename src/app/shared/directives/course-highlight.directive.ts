@@ -4,22 +4,23 @@ import { Directive, ElementRef, Input, Renderer2, OnInit, HostBinding } from '@a
   selector: '[wbCourseHighlight]'
 })
 export class CourseHighlightDirective implements OnInit {
-  @Input('wbCourseHighlight') creationDate: number | Date;
+  @Input('wbCourseHighlight') date: string | Date;
   @HostBinding('class') elementClass;
   private readonly releaseBuffer: number = 14;
 
-  currentDate = new Date();
   futureCourseColor = 'green';
   relevantCourseColor = 'blue';
 
   constructor() { }
 
   ngOnInit(): void {
-    const isFutureRelease = this.creationDate > this.currentDate;
+    const currentDate = new Date().getDate();
+    const creationDate = new Date(this.date).getDate();
+    const isFutureRelease = creationDate > currentDate;
 
     if (isFutureRelease) {
       this.elementClass = `highlight-border--${this.futureCourseColor}`;
-    } else if (!isFutureRelease && this.creationDate >= new Date().setDate(this.currentDate.getDate() - this.releaseBuffer)) {
+    } else if (!isFutureRelease && creationDate >= new Date().setDate(currentDate - this.releaseBuffer)) {
       this.elementClass = `highlight-border--${this.relevantCourseColor}`;
     }
   }

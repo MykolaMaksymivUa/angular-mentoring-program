@@ -15,7 +15,7 @@ export class DateFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.isoDate = this.date.toISOString().slice(0, 16);
+    this.isoDate = new Date(this.date).toISOString().slice(0, 16);
   }
 
 }

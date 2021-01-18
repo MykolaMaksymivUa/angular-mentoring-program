@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +15,7 @@ describe('LoginPageComponent', () => {
       declarations: [LoginPageComponent],
       imports: [
         RouterTestingModule,
+        HttpClientTestingModule,
         FormsModule
       ],
       providers: [
