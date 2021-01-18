@@ -20,7 +20,7 @@ export class AccountComponent implements OnInit {
   ) {
     this.isAuthenticated$ = this.store.select(selectUserIsAuthenticated);
     this.username$ = this.store.select(selectUsername);
-    this.store.dispatch(UserActions.getUserInfo());
+    this.authService.isAuthenticated && this.store.dispatch(UserActions.getUserInfo());
   }
 
   ngOnInit(): void {

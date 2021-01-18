@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ChipsFormComponent, DateFormComponent, TimeFormComponent } from './components';
+import { AuthorsFormComponent, DateFormComponent, TimeFormComponent } from './components';
 import { TimeConverterPipe, OrderByPipe, FilterPipe } from './pipes';
 import { CourseHighlightDirective } from './directives';
 
 const exportedPipes = [TimeConverterPipe, OrderByPipe, FilterPipe];
-const exportComponents = [ChipsFormComponent, DateFormComponent, TimeFormComponent]
+const exportComponents = [DateFormComponent, TimeFormComponent, AuthorsFormComponent]
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ const exportComponents = [ChipsFormComponent, DateFormComponent, TimeFormCompone
   exports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     CourseHighlightDirective,
     ...exportedPipes,
     ...exportComponents,
