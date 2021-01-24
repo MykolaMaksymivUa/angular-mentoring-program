@@ -1,10 +1,8 @@
-<wb-courses-navigation (searchClick)="searchTerm = $event"></wb-courses-navigation>
+<wb-courses-navigation (searchTerm)="onSearchPress($event)"></wb-courses-navigation>
 
-<ng-container *ngIf="!coursesService.isEmptyCourseList(); else emptyList">
+<ng-container *ngIf="courses.length; else emptyList">
   <wb-course-item
-    *ngFor="
-      let courseEntry of coursesService.getCourses() | async | filter: 'title':searchTerm | orderBy: 'creationDate'
-    "
+    *ngFor="let courseEntry of courses"
     [course]="courseEntry"
     (courseDelete)="onCourseDelete($event)"
     (courseEdit)="onCourseEdit($event)"

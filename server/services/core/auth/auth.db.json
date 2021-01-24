@@ -1,0 +1,34 @@
+{
+	"users": [
+  {
+    "id": 1,
+    "fakeToken": "58ebfdf7f1f558c5c86e17f6",
+    "name": {
+      "firstName": "firstNameName",
+      "lastName": "lastNameName"
+    },
+    "login": "flastNamename",
+    "password": "flastNamename"
+  },
+  {
+    "id": 2,
+    "fakeToken": "58ebfdf7ec92657b493b24da",
+    "name": {
+      "firstName": "Brock",
+      "lastName": "Beasley"
+    },
+    "login": "Morales",
+    "password": "id"
+  },
+  {
+    "id": 3,
+    "fakeToken": "58ebfdf7ec92657bsd2d234fda",
+    "name": {
+      "firstName": "Mykola",
+      "lastName": "Maksymiv"
+    },
+    "login": "admin",
+    "password": "admin"
+  }
+]
+}

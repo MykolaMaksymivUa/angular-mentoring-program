@@ -2,6 +2,8 @@
 
 <wb-breadcrumbs></wb-breadcrumbs>
 
+<wb-spinner *ngIf="spinner.isVisible()"></wb-spinner>
+
 <main role="main" class="wb-page">
   <div class="container">
     <router-outlet></router-outlet>

@@ -2,6 +2,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountComponent } from './account.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
@@ -12,6 +13,7 @@ describe('AccountComponent', () => {
       declarations: [AccountComponent],
       imports: [
         RouterTestingModule,
+        HttpClientTestingModule
       ]
     }).compileComponents();
   });
