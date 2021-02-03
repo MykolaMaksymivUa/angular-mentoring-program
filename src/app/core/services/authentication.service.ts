@@ -53,13 +53,12 @@ export class AuthenticationService {
     this.ls.removeItem(this.storageKey);
   }
 
-  getUserInfo(): Observable<string> {
+  getUserInfo(): Observable<UserEntity> {
     return this.http.post<UserEntity>(this.constants.userInfoEndpoint, this.userToken)
       .pipe(
         retry(1),
         share(),
         pluck('name'),
-        map((user: UserEntity) => `${user.firstName} ${user.lastName}`),
       );
   }
 }

@@ -3,14 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CoursesPageComponent } from './courses-page.component';
 import { CourseFormComponent, CoursesListComponent } from './components';
-import { CourseResolveGuard } from './guards';
+import { CourseResolveGuard, CoursesStatePreloadingGuard } from './guards';
 import { AuthGuard } from './../core/guards';
 
 const routes: Routes = [
   {
     path: '',
     component: CoursesPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, CoursesStatePreloadingGuard],
     data: {
       breadcrumb: 'Courses'
     },
@@ -32,9 +32,10 @@ const routes: Routes = [
           {
             path: 'new',
             component: CourseFormComponent,
-            resolve: {
-              course: CourseResolveGuard,
-            },
+            // resolve: {
+            //   course: CourseResolveGuard,
+            // },
+            canActivate: [CoursesStatePreloadingGuard],
             data: {
               breadcrumb: 'New course'
             },
@@ -42,9 +43,10 @@ const routes: Routes = [
           {
             path: 'edit/:courseID',
             component: CourseFormComponent,
-            resolve: {
-              course: CourseResolveGuard,
-            },
+            canActivate: [CoursesStatePreloadingGuard],
+            // resolve: {
+            //   course: CourseResolveGuard,
+            // },
             data: {
               breadcrumb: 'Edit course'
             },

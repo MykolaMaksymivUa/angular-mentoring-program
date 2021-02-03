@@ -1,6 +1,6 @@
 <div class="wb-account wb-account--loggedIn" *ngIf="authService.isAuthenticated; else unauthorizedMenu">
   <a href="#" class="wb-account__button">
-    <span class="fa fa-user pr-2"> Hello, {{ username }}</span>
+    <span class="fa fa-user pr-2"> Hello, {{ username$ | async }}</span>
   </a>
 
   <a class="wb-account__button" (click)="onLogout()">

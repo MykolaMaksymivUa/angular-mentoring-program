@@ -1,6 +1,6 @@
 <wb-courses-navigation (searchTerm)="onSearchPress($event)"></wb-courses-navigation>
 
-<ng-container *ngIf="courses.length; else emptyList">
+<ng-container *ngIf="courses$ | async as courses; else emptyList">
   <wb-course-item
     *ngFor="let courseEntry of courses"
     [course]="courseEntry"
