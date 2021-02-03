@@ -3,40 +3,55 @@
     <h4 class="pannel-title">{{ course && course.id ? 'Edit course' : 'Add new course' }}</h4>
   </div>
   <div class="panel-body">
-    <form (ngSubmit)="onSaveCourse(form)" id="course-form" #form="ngForm">
-      <div class="form-group">
-        <label for="courseTitle">Title:</label>
+    <form (ngSubmit)="onSaveCourse()" id="course-form" class="form-horizontal" [formGroup]="courseForm">
+      <div class="form-group" [ngClass]="{ 'has-error': errorMessageList.title }">
+        <label for="courseTitle">Title*:</label>
         <input
           type="text"
           class="form-control"
           id="courseTitle"
           name="title"
           placeholder="Course Title"
-          required
-          [(ngModel)]="course.title"
+          formControlName="title"
+          (blur)="onBlur($event)"
         />
+
+        <div class="help-block" *ngIf="errorMessageList.title">
+          {{ errorMessageList.title }}
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="courseDescription">Description:</label>
+      <div class="form-group" [ngClass]="{ 'has-error': errorMessageList.description }">
+        <label for="courseDescription">Description*:</label>
         <textarea
           rows="6"
           class="form-control"
           name="description"
           placeholder="Course Description"
-          [(ngModel)]="course.description"
+          formControlName="description"
+          (blur)="onBlur($event)"
         ></textarea>
+
+        <div class="help-block" *ngIf="errorMessageList.description">
+          {{ errorMessageList.description }}
+        </div>
       </div>
 
-      <wb-time-form [timeDuration]="course.duration"></wb-time-form>
+      <wb-date-form [formControl]="courseForm.get('creationDate')"></wb-date-form>
 
-      <wb-date-form [date]="course.creationDate"></wb-date-form>
+      <div class="form-group" [ngClass]="{ 'has-error': errorMessageList.duration }">
+        <wb-time-form [formControl]="courseForm.get('duration')" (focusOut)="onBlur($event)"></wb-time-form>
 
-      <wb-chips-form></wb-chips-form>
+        <div class="help-block" *ngIf="errorMessageList.duration">
+          {{ errorMessageList.duration }}
+        </div>
+      </div>
+
+      <wb-authors-form></wb-authors-form>
 
       <div class="d-flex justify-content-end">
         <button class="btn btn-secondary mr-4" type="button" (click)="onCancel()">Cancel</button>
-        <button type="submit" class="btn btn-success" [disabled]="form.invalid">Save</button>
+        <button type="submit" class="btn btn-success" [disabled]="courseForm.invalid">Save</button>
       </div>
     </form>
   </div>

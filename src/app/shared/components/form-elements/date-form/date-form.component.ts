@@ -1,21 +1,55 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ControlContainer, NgForm } from '@angular/forms';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator
+} from '@angular/forms';
 
 @Component({
   selector: 'wb-date-form',
   templateUrl: './date-form.component.html',
   styleUrls: ['./date-form.component.less'],
-  // @TODO override for correct form with nested components.
-  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DateFormComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => DateFormComponent),
+      multi: true
+    }]
 })
-export class DateFormComponent implements OnInit {
-  @Input() date: Date;
-  isoDate: string;
+export class DateFormComponent implements OnInit, ControlValueAccessor, Validator {
+  @Input() formControl: FormControl;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.isoDate = new Date(this.date).toISOString().slice(0, 16);
+  }
+
+  writeValue(obj: any): void {
+  }
+
+  registerOnChange(fn: any): void {
+  }
+
+  registerOnTouched(fn: any): void {
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+  }
+
+  validate(control: AbstractControl): ValidationErrors {
+    return null;
+  }
+
+  registerOnValidatorChange?(fn: () => void): void {
   }
 
 }

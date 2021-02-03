@@ -1,20 +1,21 @@
 <div class="row align-items-center">
   <div class="form-group col-3">
-    <label for="time-input">Duration:</label>
+    <label for="time-input">Duration*:</label>
     <input
       type="number"
       class="form-control"
       id="time-input"
       name="duration"
+      min="0"
       placeholder="Add duration"
-      [(ngModel)]="timeDuration"
-      required
+      [formControl]="formControl"
+      (blur)="onBlur($event)"
     />
   </div>
 
   <div class="col-3 mt-2">
     <span class="font-italic">
-      {{ timeDuration | timeConverter: 'minutes':'hours' }}
+      {{ formControl.value | timeConverter: 'minutes':'hours' }}
     </span>
   </div>
 </div>

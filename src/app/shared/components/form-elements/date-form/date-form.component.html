@@ -1,14 +1,13 @@
 <div class="row">
   <div class="form-group col-3">
-    <label for="date-input">Date:</label>
+    <label for="date-input">Date*:</label>
     <input
       type="datetime-local"
       class="form-control"
       id="date-input"
       name="creationDate"
       placeholder="Add time"
-      [(ngModel)]="isoDate"
-      required
+      [formControl]="formControl"
     />
   </div>
 </div>

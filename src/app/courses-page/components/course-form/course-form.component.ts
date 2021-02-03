@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, NgForm, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { CourseModel } from './../../models';
 import { CoursesFacade } from 'src/app/core/@ngrx/courses/courses.facade';
+import { validationMessageMap } from '../../tokens';
 
 @Component({
   selector: 'wb-course-form',
@@ -13,12 +14,18 @@ import { CoursesFacade } from 'src/app/core/@ngrx/courses/courses.facade';
   styleUrls: ['./course-form.component.less']
 })
 export class CourseFormComponent implements OnInit, OnDestroy {
-  private courseSub: Subscription;
   private componentDestroyed$: Subject<void> = new Subject<void>();
   course: CourseModel;
+  courseForm: FormGroup;
+  errorMessageList = {
+    title: '',
+    description: '',
+    duration: ''
+  };
 
   constructor(
-    private courseFacade: CoursesFacade
+    private courseFacade: CoursesFacade,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +33,7 @@ export class CourseFormComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe((course: CourseModel) => {
         this.course = course;
+        this.buildForm();
       });
   }
 
@@ -34,12 +42,13 @@ export class CourseFormComponent implements OnInit, OnDestroy {
     this.componentDestroyed$.complete();
   }
 
-  onSaveCourse(form: NgForm) {
+  onSaveCourse() {
     const method = this.course.id ? 'updateCourse' : 'createCourse';
     const course = {
       ...this.course,
-      ...form.value,
-      creationDate: new Date(form.value.creationDate),
+      ...this.courseForm.value,
+
+      //@TODO Dropdown with authors will be added later
       authors: [
         ...this.course.authors,
         {
@@ -55,5 +64,50 @@ export class CourseFormComponent implements OnInit, OnDestroy {
   onCancel() {
     // deactivate guard ???
     this.courseFacade.goTo({ path: ['/courses'] });
+  }
+
+  onBlur(e) {
+    const inputTarget = e.target;
+    const controlName = inputTarget.getAttribute('formControlName') || inputTarget.getAttribute('name');
+    this.setValidationMessage(this.courseForm.get(controlName), controlName);
+  }
+
+  buildForm() {
+    this.courseForm = this.fb.group({
+      title: this.fb.control(this.course.title,
+        {
+          validators: [Validators.required, Validators.maxLength(50)],
+          updateOn: 'blur'
+        }),
+      description: this.fb.control(this.course.description,
+        {
+          validators: [Validators.required, Validators.maxLength(500)],
+          updateOn: 'blur'
+        }),
+      duration: this.fb.control(
+        this.course.duration,
+        {
+          validators: [Validators.required, Validators.min(1)],
+          updateOn: 'blur'
+
+        }),
+      creationDate: this.fb.control(
+        new Date(this.course.creationDate).toISOString().slice(0, 16),
+        {
+          validators: [Validators.required],
+          updateOn: 'blur'
+
+        }),
+    });
+  }
+
+  private setValidationMessage(c: AbstractControl, controlName: string) {
+    this.errorMessageList[controlName] = '';
+
+    if ((c.touched || c.dirty) && c.errors) {
+      this.errorMessageList[controlName] = Object.keys(c.errors)
+        .map(key => validationMessageMap[controlName][key])
+        .join('\r\n');
+    }
   }
 }
